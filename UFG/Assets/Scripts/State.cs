@@ -5,14 +5,23 @@ using UnityEngine;
 public abstract class State
 {
     public StateController controller;
+
     public void OnStateEnter()
     {
-        //Code here will always run
         OnEnter();
     }
     protected virtual void OnEnter()
     {
 
+    }
+    public void OnStateEnter(float takeOffTime)
+    {
+        //Code here will always run
+        OnEnter(takeOffTime);
+    }
+    protected virtual void OnEnter(float takeOffTime)
+    {
+        OnEnter(takeOffTime);
     }
 
     public void OnStateUpdate()
@@ -39,6 +48,7 @@ public abstract class State
     public virtual void OnHit()
     {
         //Switch to Hit Animation
+        controller.SetState(controller.hitTaken);
     }
 }
 

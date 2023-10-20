@@ -8,6 +8,10 @@ public class StateController : MonoBehaviour
     State currentState;
     public Idle idle;
     public InAir inAir;
+    public Walking walking;
+    public Running running;
+    public HitTaken hitTaken;
+    public HeavyHitTaken heavyHitTaken;
 
     [Header("Character Stats")]
     public float jumpVelocity;
@@ -19,7 +23,8 @@ public class StateController : MonoBehaviour
     {
         idle = new Idle();
         inAir = new InAir(jumpVelocity);
-        //walking = new Walking(walkSpeed);
+        walking = new Walking(walkSpeed);
+        hitTaken = new HitTaken();
         //running = new Running(runSpeed);
     }
     public void Update ()
@@ -38,5 +43,14 @@ public class StateController : MonoBehaviour
         else if (currentState != null) currentState.OnStateExit();
         
         currentState = state;
+        currentState.OnStateEnter();
+    }
+    public void SetState(State state, float takeOffTime)
+    {
+        if (state == currentState) return;
+        else if (currentState != null) currentState.OnStateExit();
+
+        currentState = state;
+        currentState.OnStateEnter(takeOffTime);
     }
 }

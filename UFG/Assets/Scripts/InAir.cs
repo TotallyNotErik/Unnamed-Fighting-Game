@@ -13,14 +13,14 @@ public class InAir : State
         this.InitialVelocity = InitialVelocity;
     }
 
-    protected override void OnEnter()
+    protected override void OnEnter(float takeoffTime)
     {
-        takeoffTime = Time.time;
+        this.takeoffTime = takeoffTime;
     }
     protected override void OnUpdate()
     {
         lastPosition = controller.transform.position.y;
-        controller.transform.position.y = InitialVelocity * (Time.time - takeoffTime) + (-32 * (Time.time - takeoffTime) * (Time.time - takeoffTime)) / 2;
+        controller.transform.position = new Vector3(controller.transform.position.x, InitialVelocity * (Time.time - takeoffTime) + (-32 * (Time.time - takeoffTime) * (Time.time - takeoffTime)) / 2, controller.transform.position.z);
         if (controller.transform.position.y == 0)
         {
             controller.SetState(controller.idle);

@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
-public class Walking : MonoBehaviour
+public class Walking : Grounded
 {
-    // Start is called before the first frame update
-    void Start()
+    private float walkSpeed;
+
+    public Walking(float walkSpeed)
     {
-        
+        this.walkSpeed = walkSpeed;
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void OnUpdate()
     {
-        
+        controller.transform.position += new Vector3(walkSpeed * Time.deltaTime,0,0);
     }
 }
