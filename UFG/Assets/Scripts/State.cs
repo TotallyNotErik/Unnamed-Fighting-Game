@@ -6,17 +6,19 @@ public abstract class State
 {
     public StateController controller;
 
-    public void OnStateEnter()
+    public void OnStateEnter(StateController controller)
     {
+        this.controller = controller;
         OnEnter();
     }
     protected virtual void OnEnter()
     {
 
     }
-    public void OnStateEnter(float takeOffTime)
+    public void OnStateEnter(float takeOffTime, StateController controller)
     {
         //Code here will always run
+        this.controller = controller;
         OnEnter(takeOffTime);
     }
     protected virtual void OnEnter(float takeOffTime)
@@ -50,5 +52,28 @@ public abstract class State
         //Switch to Hit Animation
         controller.SetState(controller.hitTaken);
     }
+
+    public virtual void OnJump()
+    {
+
+    }
+    public virtual void OnPunch()
+    {
+
+    }
+    public virtual void OnLeft()
+    {
+
+    }
+    public virtual void OnRight()
+    {
+
+    }
+    public virtual void OnDown()
+    {
+
+    }
+    public virtual void OnKick() { }
+    public virtual void OnJab() { }
 }
 

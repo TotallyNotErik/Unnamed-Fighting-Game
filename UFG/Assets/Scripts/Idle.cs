@@ -6,7 +6,7 @@ public class Idle : Grounded
 {
     protected override void OnEnter()
     {
-        //Play idle animation
+        Debug.Log("Idle");
     }
 
     protected override void OnUpdate()

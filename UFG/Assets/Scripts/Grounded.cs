@@ -10,11 +10,18 @@ public class Grounded : State
     }
     protected override void OnUpdate()
     {
-        //if Jumping
-        //Jump();
+
     }
-    public void Jump(float initialVelocity)
+
+    public void Jump()
     {
-        controller.SetState(controller.inAir);
+        Debug.Log("Jumping!");
+        controller.SetState(controller.inAir, Time.time);
+    }
+    public override void OnJump()
+    {
+        Debug.Log("Jump input!");
+        Jump();
+
     }
 }

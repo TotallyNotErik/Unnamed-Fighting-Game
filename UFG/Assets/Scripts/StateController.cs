@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class StateController : MonoBehaviour
 {
-    State currentState;
+
     public Idle idle;
     public InAir inAir;
     public Walking walking;
@@ -14,6 +14,7 @@ public class StateController : MonoBehaviour
     public HeavyHitTaken heavyHitTaken;
 
     [Header("Character Stats")]
+    public State currentState;
     public float jumpVelocity;
     public float walkSpeed;
     public float runSpeed;
@@ -26,6 +27,8 @@ public class StateController : MonoBehaviour
         walking = new Walking(walkSpeed);
         hitTaken = new HitTaken();
         //running = new Running(runSpeed);
+
+        SetState(idle);
     }
     public void Update ()
     {
@@ -41,9 +44,10 @@ public class StateController : MonoBehaviour
     {
         if (state == currentState) return;
         else if (currentState != null) currentState.OnStateExit();
-        
+
+        Debug.Log("State Set!");
         currentState = state;
-        currentState.OnStateEnter();
+        currentState.OnStateEnter(this);
     }
     public void SetState(State state, float takeOffTime)
     {
@@ -51,6 +55,36 @@ public class StateController : MonoBehaviour
         else if (currentState != null) currentState.OnStateExit();
 
         currentState = state;
-        currentState.OnStateEnter(takeOffTime);
+        currentState.OnStateEnter(takeOffTime, this);
+    }
+
+    void OnJump()
+    {
+        if (currentState != null) currentState.OnJump();
+    }
+
+    void OnRight()
+    {
+        if (currentState != null) currentState.OnRight();
+    }
+    void OnLeft()
+    {
+        if (currentState != null) currentState.OnLeft();
+    }
+    void OnPunch()
+    {
+        if(currentState != null) currentState.OnPunch();
+    }
+    void OnDown()
+    {
+        if(currentState != null) currentState.OnDown();
+    }
+    void OnKick()
+    {
+        if(currentState != null) currentState.OnKick();
+    }
+    void OnJab()
+    {
+        if(currentState != null) currentState.OnJab();
     }
 }
