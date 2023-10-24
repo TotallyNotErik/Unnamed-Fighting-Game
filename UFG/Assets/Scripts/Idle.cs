@@ -6,7 +6,7 @@ public class Idle : Grounded
 {
     protected override void OnEnter()
     {
-        Debug.Log("Idle");
+        cancel = true;
     }
 
     protected override void OnUpdate()
@@ -20,4 +20,5 @@ public class Idle : Grounded
         //Back
             //WalkBackwards?
     }
+
 }

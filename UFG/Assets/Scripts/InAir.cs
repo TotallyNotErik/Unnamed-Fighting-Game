@@ -42,5 +42,29 @@ public class InAir : State
             //check for down input for fast fall
         }
     }
-    
+
+    public override void OnPunch()
+    {
+        if (cancel);
+    }
+    public override void OnLeft()
+    {
+        if (cancel);
+    }
+    public override void OnRight()
+    {
+        if (cancel) ;
+    }
+    public override void OnDown()
+    {
+        if (cancel) ;
+    }
+    public override void OnKick()
+    {
+        if (cancel) ;
+    }
+    public override void OnJab()
+    {
+        if (cancel) ;
+    }
 }

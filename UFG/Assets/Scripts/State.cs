@@ -6,9 +6,12 @@ public abstract class State
 {
     public StateController controller;
 
+    protected bool cancel;
+
     public void OnStateEnter(StateController controller)
     {
         this.controller = controller;
+        cancel = false;
         OnEnter();
     }
     protected virtual void OnEnter()
@@ -75,5 +78,8 @@ public abstract class State
     }
     public virtual void OnKick() { }
     public virtual void OnJab() { }
+
+    public virtual void OnForward() { }
+    public virtual void OnBackward() { }
 }
 

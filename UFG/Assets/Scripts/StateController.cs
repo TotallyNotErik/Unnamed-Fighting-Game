@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class StateController : MonoBehaviour
 {
-
+    public GameObject opponent;
     public Idle idle;
     public InAir inAir;
     public Walking walking;
