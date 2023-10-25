@@ -66,11 +66,23 @@ public abstract class State
     }
     public virtual void OnLeft()
     {
-
+        if (controller.transform.position.x - controller.opponent.transform.position.x < 0)
+        {
+            OnBackward();
+        }
+        else
+            OnForward();
     }
     public virtual void OnRight()
     {
-
+        if (controller.transform.position.x - controller.opponent.transform.position.x < 0)
+        {
+            OnForward();
+        }
+        else
+        {
+            OnBackward();
+        }
     }
     public virtual void OnDown()
     {

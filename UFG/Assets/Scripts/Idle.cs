@@ -9,7 +9,7 @@ public class Idle : Grounded
         cancel = true;
     }
 
-    protected override void OnUpdate()
+    protected override void OnGroundChildUpdate()
     {
         //Down
             //Crouch

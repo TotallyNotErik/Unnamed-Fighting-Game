@@ -10,8 +10,12 @@ public class Grounded : State
     }
     protected override void OnUpdate()
     {
+        if (controller.inputs[controller.i].Three == (InputEnum)1)
+                OnJump();
 
+        OnGroundChildUpdate();
     }
+    protected virtual void OnGroundChildUpdate() { }
 
     public void Jump()
     {
