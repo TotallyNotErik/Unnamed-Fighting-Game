@@ -17,7 +17,7 @@ public enum InputEnum
 /*This Struct is the basis for the input buffer
  * One is for movement inputs, right and left
  * Two is for upwards inputs, Jump and down
- * Three is for attack inputs, Punch, Jab. Kick, and Dash
+ * Three is for attack inputs, Punch, Jab. Kick, and 
 */
 public struct FrameInputs
 {

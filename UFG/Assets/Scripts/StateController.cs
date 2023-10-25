@@ -6,6 +6,7 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class StateController : MonoBehaviour
 {
+    [Header("State Machine Information")]
     public GameObject opponent;
     public Idle idle;
     public InAir inAir;
@@ -13,13 +14,14 @@ public class StateController : MonoBehaviour
     public Running running;
     public HitTaken hitTaken;
     public HeavyHitTaken heavyHitTaken;
+
+    [Header("Inputs")]
     public FrameInputs[] inputs = new FrameInputs[30];
     public int i = 0;
     private int inputOne;
     private int inputTwo;
-    private bool right = false;
-    private bool left = false;
-    private bool down = false;
+
+
 
     [Header("Character Stats")]
     public State currentState;
@@ -43,7 +45,7 @@ public class StateController : MonoBehaviour
         setInput(0, 0, 0);
         if (inputOne == inputTwo)
             inputTwo = 0;
-        setInput(inputOne, inputTwo);
+        setInput(inputOne, inputTwo, 0);
 
         i++;
         if (i >= 30)
@@ -57,6 +59,15 @@ public class StateController : MonoBehaviour
     {
 
     }
+
+    /* This Section is the function used to change the current state.
+     * The first function is the base SetState function.  If the state is already active, it will return.  
+     * Otherwise, as long as the current state is not null, it will play the current state's exit function, then set the state to the new state, 
+     * then play the new state's enter function
+     *
+     * The second function is an overloaded version, solely for handling mid-air state changes (ie. falling and punching at the same time.)
+     * it does the exact same function, but also passes a time value into the onStateEnter function.
+     */
     public void SetState(State state)
     {
         if (state == currentState) return;
@@ -75,9 +86,32 @@ public class StateController : MonoBehaviour
         currentState.OnStateEnter(takeOffTime, this);
     }
 
+    /*This section is to read in inputs and transfer them into the input buffer
+     * This is achieved through the Unity Input System Package Press interaction, which
+     * calls the function once when the input is started, and again when the input
+     * is ended.
+     * 
+     * This function will set a boolean to its opposite every time it is called, when the boolean becomes true, it sets 
+     * the corresponding input.  
+     * When the boolean becomes false, it will set the input to neutral.
+     * 
+     * For single button inputs, the boolean expressions are not necessary.
+     */
+    private bool right = false;
+    private bool left = false;
+    private bool down = false;
+    private bool jump = false;
+
     void OnJump()
     {
-        setInput(1);
+        jump = !jump;
+        if(jump)
+        {
+            if (inputTwo == 0)
+                inputTwo = 1;
+        }
+        if (!jump)
+            inputTwo = 0;
 
     }
     void OnLeft()
@@ -130,6 +164,7 @@ public class StateController : MonoBehaviour
         setInput(7);
     }
 
+    /* softClearInputs() will shift all inputs down by one.*/
     void softClearInputs()
     {
         for (int j = 0; j < inputs.Length - 1; j++)
@@ -141,6 +176,7 @@ public class StateController : MonoBehaviour
         i = 29;
         setInput(0, 0, 0);
     }
+    /* clearInputs() will set all inputs to 0, then reset the input frame to 0*/
     void clearInputs()
     {
         for (int j = 0; j < inputs.Length; j++)

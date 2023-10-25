@@ -7,11 +7,11 @@
             "actions": [
                 {
                     "name": "Jump",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "88b2193b-af9b-456b-87ee-f9b480a04802",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press",
+                    "interactions": "Press(behavior=2)",
                     "initialStateCheck": false
                 },
                 {
