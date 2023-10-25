@@ -12,6 +12,8 @@ public enum InputEnum
     Punch,
     Kick,
     Jab,
+    Forward,
+    Backward
 };
 
 /*This Struct is the basis for the input buffer
@@ -24,5 +26,6 @@ public struct FrameInputs
     public InputEnum One; 
     public InputEnum Two;
     public InputEnum Three;
+    public InputEnum Four;
 };
 

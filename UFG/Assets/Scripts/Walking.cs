@@ -5,14 +5,23 @@ using UnityEngine;
 
 public class Walking : Grounded
 {
-    private float walkSpeed;
+    protected float walkSpeed;
 
+
+    protected override void OnEnter(float movement)
+    {
+        cancel = true;
+        if (movement < 0)
+            walkSpeed = -Mathf.Abs(walkSpeed);
+        else if (movement > 0)
+            walkSpeed = Mathf.Abs(walkSpeed);
+    }
     public Walking(float walkSpeed)
     {
         this.walkSpeed = walkSpeed;
     }
 
-    protected override void OnUpdate()
+    protected override void OnGroundChildUpdate()
     {
         controller.transform.position += new Vector3(walkSpeed * Time.deltaTime,0,0);
     }

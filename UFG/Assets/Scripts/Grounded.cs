@@ -11,13 +11,20 @@ public class Grounded : State
     protected override void OnUpdate()
     {
         if (upwardInput.x == 1 || upwardInput.y == 1 || upwardInput.z == 1)
-                OnJump();
-
+            OnJump();
+        else if (upwardInput.z == 4)
+            OnDown();
+        else if (sidewaysInput.z == 2)
+            OnLeft();
+        else if (sidewaysInput.z == 3)
+            OnRight();
+        else if (sidewaysInput.z == 0)
+            controller.SetState(controller.idle);
         OnGroundChildUpdate();
     }
     protected virtual void OnGroundChildUpdate() { }
 
-    public void Jump()
+    protected void Jump()
     {
         controller.SetState(controller.inAir, Time.time);
     }
@@ -34,13 +41,34 @@ public class Grounded : State
     }
     public override void OnLeft() //replace with forward function and backward function
     {
-        if (cancel) ;
-            //Move Left
+        int direction = -1;
+        if (cancel)
+        {
+            if(forwardBack.z == 8)
+            {
+                controller.SetState(controller.walking, direction);
+            }
+            else if(forwardBack.z == 9)
+            {
+                controller.SetState(controller.walkingBackwards, direction);
+            }
+        }
+        //Move Left
     }
     public override void OnRight() //replace with forward function and backward function
     {
-        if (cancel) ; 
-            //Move Right
+        int direction = 1;
+        if (cancel)
+        {
+            if (forwardBack.z == 8)
+            {
+                controller.SetState(controller.walking, direction);
+            }
+            else if (forwardBack.z == 9)
+            {
+                controller.SetState(controller.walkingBackwards, direction);
+            }
+        }
     }
     public override void OnDown()
     {

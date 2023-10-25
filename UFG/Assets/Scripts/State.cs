@@ -11,7 +11,7 @@ public abstract class State
     protected Vector3 sidewaysInput = new Vector3(0,0,0);
     protected Vector3 upwardInput = new Vector3(0, 0, 0);
     protected Vector3 actionInput = new Vector3(0, 0, 0);
-
+    protected Vector3 forwardBack = new Vector3(0, 0, 0);
     public void OnStateEnter(StateController controller)
     {
         this.controller = controller;
@@ -28,9 +28,9 @@ public abstract class State
         this.controller = controller;
         OnEnter(takeOffTime);
     }
-    protected virtual void OnEnter(float takeOffTime)
+    protected virtual void OnEnter(float valueToPass)
     {
-        OnEnter(takeOffTime);
+
     }
 
     public void OnStateUpdate()
@@ -47,6 +47,7 @@ public abstract class State
     public void OnStateExit()
     {
         //Code here will always run
+        cancel = false;
         OnExit();
     }
     protected virtual void OnExit()
@@ -99,29 +100,27 @@ public abstract class State
     public virtual void OnBackward() { }
     private void readInputBuffer() 
     {
-        for(int j = 1; j <=3 ; j++)
-        {
-            if (j == 1)
-            {
                 sidewaysInput.x = (int)controller.inputs[Mathf.Clamp(controller.i - 2, 0, 29)].One;
                 sidewaysInput.y = (int)controller.inputs[Mathf.Clamp(controller.i - 1, 0, 29)].One;
                 sidewaysInput.z = (int)controller.inputs[controller.i].One;
-            }
 
-            if(j == 2)
-            {
                 upwardInput.x = (int)controller.inputs[Mathf.Clamp(controller.i - 2, 0, 29)].Two;
                 upwardInput.y = (int)controller.inputs[Mathf.Clamp(controller.i - 1, 0, 29)].Two;
                 upwardInput.z = (int)controller.inputs[controller.i].Two;
-            }
-
-            if (j == 3)
-            {
+ 
                 actionInput.x = (int)controller.inputs[Mathf.Clamp(controller.i - 2, 0, 29)].Three;
                 actionInput.y = (int)controller.inputs[Mathf.Clamp(controller.i - 1, 0, 29)].Three;
                 actionInput.z = (int)controller.inputs[controller.i].Three;
-            }
-        }
+
+                forwardBack.x = (int)controller.inputs[Mathf.Clamp(controller.i - 2, 0, 29)].Four;
+                forwardBack.y = (int)controller.inputs[Mathf.Clamp(controller.i - 1, 0, 29)].Four;
+                forwardBack.z = (int)controller.inputs[controller.i].Four;
+
+        //Debug.Log(sidewaysInput);
+        //Debug.Log(upwardInput);
+        //Debug.Log(actionInput);
+        //Debug.Log(forwardBack);
+
     }
 }
 

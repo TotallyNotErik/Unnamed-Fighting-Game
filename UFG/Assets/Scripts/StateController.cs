@@ -14,6 +14,7 @@ public class StateController : MonoBehaviour
     public Running running;
     public HitTaken hitTaken;
     public HeavyHitTaken heavyHitTaken;
+    public WalkingBackwards walkingBackwards;
 
     [Header("Inputs")]
     public FrameInputs[] inputs = new FrameInputs[30];
@@ -36,6 +37,7 @@ public class StateController : MonoBehaviour
         inAir = new InAir(jumpVelocity);
         walking = new Walking(walkSpeed);
         hitTaken = new HitTaken();
+        walkingBackwards = new WalkingBackwards(walkSpeed/2);
         //running = new Running(runSpeed);
 
         SetState(idle);
@@ -43,14 +45,10 @@ public class StateController : MonoBehaviour
     public void Update ()
     {
         setInput(0, 0, 0);
-        if (inputOne == inputTwo)
-            inputTwo = 0;
         setInput(inputOne, inputTwo, 0);
-
         i++;
         if (i >= 30)
             softClearInputs();
-
         currentState.OnStateUpdate();
         OverriddenUpdate();
     }
@@ -77,13 +75,13 @@ public class StateController : MonoBehaviour
         currentState = state;
         currentState.OnStateEnter(this);
     }
-    public void SetState(State state, float takeOffTime)
+    public void SetState(State state, float valueToPass)
     {
         if (state == currentState) return;
         else if (currentState != null) currentState.OnStateExit();
 
         currentState = state;
-        currentState.OnStateEnter(takeOffTime, this);
+        currentState.OnStateEnter(valueToPass, this);
     }
 
     /*This section is to read in inputs and transfer them into the input buffer
@@ -120,11 +118,15 @@ public class StateController : MonoBehaviour
         if(left)
         {
             if (inputOne == 0)
+            {
                 inputOne = 2;
+            }
 
         }
         if (!left)
+        {
             inputOne = 0;
+        }
     }
     void OnRight()
     {
@@ -132,10 +134,15 @@ public class StateController : MonoBehaviour
         if (right)
         {
             if (inputOne == 0)
+            {
                 inputOne = 3;
+            }
         }
         if (!right)
-                inputOne = 0;
+        {
+            inputOne = 0;
+        }
+
     }
 
 
@@ -172,9 +179,10 @@ public class StateController : MonoBehaviour
             inputs[j].One = inputs[j + 1].One;
             inputs[j].Two = inputs[j + 1].Two;
             inputs[j].Three = inputs[j + 1].Three;
+            inputs[j].Four = inputs[j + 1].Four;
         }
         i = 29;
-        setInput(0, 0, 0);
+        //setInput(0, 0, 0, 0);
     }
     /* clearInputs() will set all inputs to 0, then reset the input frame to 0*/
     void clearInputs()
@@ -183,22 +191,46 @@ public class StateController : MonoBehaviour
         {
             inputs[j].One = 0;
             inputs[j].Two = 0;
+            inputs[j].Three = 0;
+            inputs[j].Four = 0;
         }
         i = 0;
     }
-    void setInput(int x, int y, int z = 0)
+    void setInput(int x, int y, int z)
     {
         inputs[i].One = (InputEnum)x;
         inputs[i].Two = (InputEnum)y;
         inputs[i].Three = (InputEnum)z;
-        Debug.Log(inputs[i].One);
-        Debug.Log(inputs[i].Two);
+        inputs[i].Four = (InputEnum)0;
+        if (x != 0)
+        {
+            if(this.transform.position.x <= opponent.transform.position.x)
+            {
+                if (x == 2)
+                    inputs[i].Four = (InputEnum)9;
+                else if (x == 3)
+                    inputs[i].Four = (InputEnum)8;
+            }
+            else if (this.transform.position.x > opponent.transform.position.x)
+            {
+                if (x == 2)
+                    inputs[i].Four = (InputEnum)8;
+                else if (x == 3)
+                    inputs[i].Four = (InputEnum)9;
+            }
+
+        }
+
+
+        //Debug.Log(inputs[i].One);
+        //Debug.Log(inputs[i].Two);
+        //Debug.Log(inputs[i].Three);
+        //Debug.Log(inputs[i].Four);
         return;
     }
     void setInput(int z)
     {
         inputs[i].Three = (InputEnum)z;
-        Debug.Log(inputs[i].Three);
     }
     
 }
