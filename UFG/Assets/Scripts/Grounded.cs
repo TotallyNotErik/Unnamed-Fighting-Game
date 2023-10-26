@@ -12,13 +12,13 @@ public class Grounded : State
     {
         if (upwardInput.x == 1 || upwardInput.y == 1 || upwardInput.z == 1)
             OnJump();
-        if (upwardInput.z == 4)
+        else if (upwardInput.z == 4)
             OnDown();
-        if (sidewaysInput.z == 2)
+        else if (sidewaysInput.z == 2)
             OnLeft();
-        if (sidewaysInput.z == 3)
+        else if (sidewaysInput.z == 3)
             OnRight();
-        if (sidewaysInput.z == 0)
+        else if (sidewaysInput.z == 0)
             controller.SetState(controller.idle);
         OnGroundChildUpdate();
     }
@@ -26,7 +26,7 @@ public class Grounded : State
 
     protected void Jump()
     {
-        controller.SetState(controller.inAir, Time.time);
+        controller.SetState(controller.inAir, controller.jumpVelocity);
     }
     public override void OnJump()
     {

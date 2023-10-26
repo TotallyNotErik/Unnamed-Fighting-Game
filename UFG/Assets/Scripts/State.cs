@@ -8,10 +8,10 @@ public abstract class State
 
     protected bool cancel;
 
-    protected Vector3 sidewaysInput = new Vector3(0,0,0);
-    protected Vector3 upwardInput = new Vector3(0, 0, 0);
-    protected Vector3 actionInput = new Vector3(0, 0, 0);
-    protected Vector3 forwardBack = new Vector3(0, 0, 0);
+    protected static Vector3 sidewaysInput = new Vector3(0,0,0);
+    protected static Vector3 upwardInput = new Vector3(0, 0, 0);
+    protected static Vector3 actionInput = new Vector3(0, 0, 0);
+    protected static Vector3 forwardBack = new Vector3(0, 0, 0);
     public void OnStateEnter(StateController controller)
     {
         this.controller = controller;
@@ -37,7 +37,7 @@ public abstract class State
     {
         //Read Input Buffer
         readInputBuffer();
-        if (actionInput.z == 5 || actipnInput.y == 5 || actionInput.x == 5)
+        if (actionInput.z == 5 || actionInput.y == 5 || actionInput.x == 5)
             OnDash();
         OnUpdate();
     }
@@ -97,7 +97,7 @@ public abstract class State
     }
     public virtual void OnDash()
     {
-
+        controller.SetState(controller.dashing);
     }
     public virtual void OnKick() { }
     public virtual void OnJab() { }
@@ -128,5 +128,6 @@ public abstract class State
         //Debug.Log(forwardBack);
 
     }
+
 }
 

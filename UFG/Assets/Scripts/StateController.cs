@@ -15,12 +15,13 @@ public class StateController : MonoBehaviour
     public HitTaken hitTaken;
     public HeavyHitTaken heavyHitTaken;
     public WalkingBackwards walkingBackwards;
-
+    public Dashing dashing;
     [Header("Inputs")]
     public FrameInputs[] inputs = new FrameInputs[30];
     public int i = 0;
     private int inputOne;
     private int inputTwo;
+    private int inputThree;
 
 
 
@@ -38,14 +39,15 @@ public class StateController : MonoBehaviour
         walking = new Walking(walkSpeed);
         hitTaken = new HitTaken();
         walkingBackwards = new WalkingBackwards(walkSpeed/2);
+        dashing = new Dashing();
         //running = new Running(runSpeed);
 
         SetState(idle);
     }
     public void Update ()
     {
-        setInput(0, 0, 0);
-        setInput(inputOne, inputTwo, 0);
+        //setInput(0, 0, 0);
+        setInput(inputOne, inputTwo, inputThree);
         i++;
         if (i >= 30)
             softClearInputs();
@@ -161,6 +163,7 @@ public class StateController : MonoBehaviour
     void OnDash()
     {
         setInput(5);
+        Debug.Log("Dash Input");
     }
     void OnPunch()
     {
@@ -224,7 +227,7 @@ public class StateController : MonoBehaviour
             }
 
         }
-
+        inputThree = 0;
 
         //Debug.Log(inputs[i].One);
         //Debug.Log(inputs[i].Two);
@@ -234,7 +237,7 @@ public class StateController : MonoBehaviour
     }
     void setInput(int z)
     {
-        inputs[i].Three = (InputEnum)z;
+        inputThree = z;
     }
     
 }
