@@ -9,6 +9,7 @@ public enum InputEnum
     Left,
     Right,
     Down,
+    Dash,
     Punch,
     Kick,
     Jab,

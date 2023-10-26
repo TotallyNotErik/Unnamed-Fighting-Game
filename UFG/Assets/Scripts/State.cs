@@ -37,6 +37,8 @@ public abstract class State
     {
         //Read Input Buffer
         readInputBuffer();
+        if (actionInput.z == 5 || actipnInput.y == 5 || actionInput.x == 5)
+            OnDash();
         OnUpdate();
     }
     protected virtual void OnUpdate()
@@ -90,6 +92,10 @@ public abstract class State
         }
     }
     public virtual void OnDown()
+    {
+
+    }
+    public virtual void OnDash()
     {
 
     }

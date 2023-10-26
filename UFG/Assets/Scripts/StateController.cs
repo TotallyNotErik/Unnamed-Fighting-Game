@@ -158,17 +158,21 @@ public class StateController : MonoBehaviour
             inputTwo = 0;
 
     }
-    void OnPunch()
+    void OnDash()
     {
         setInput(5);
     }
-    void OnKick()
+    void OnPunch()
     {
         setInput(6);
     }
-    void OnJab()
+    void OnKick()
     {
         setInput(7);
+    }
+    void OnJab()
+    {
+        setInput(8);
     }
 
     /* softClearInputs() will shift all inputs down by one.*/
@@ -207,16 +211,16 @@ public class StateController : MonoBehaviour
             if(this.transform.position.x <= opponent.transform.position.x)
             {
                 if (x == 2)
-                    inputs[i].Four = (InputEnum)9;
+                    inputs[i].Four = (InputEnum)10;
                 else if (x == 3)
-                    inputs[i].Four = (InputEnum)8;
+                    inputs[i].Four = (InputEnum)9;
             }
             else if (this.transform.position.x > opponent.transform.position.x)
             {
                 if (x == 2)
-                    inputs[i].Four = (InputEnum)8;
-                else if (x == 3)
                     inputs[i].Four = (InputEnum)9;
+                else if (x == 3)
+                    inputs[i].Four = (InputEnum)10;
             }
 
         }
