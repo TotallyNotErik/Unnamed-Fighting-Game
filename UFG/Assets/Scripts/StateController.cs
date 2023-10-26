@@ -16,6 +16,7 @@ public class StateController : MonoBehaviour
     public HeavyHitTaken heavyHitTaken;
     public WalkingBackwards walkingBackwards;
     public Dashing dashing;
+    public AirDashing airDashing;
     [Header("Inputs")]
     public FrameInputs[] inputs = new FrameInputs[30];
     public int i = 0;
@@ -40,6 +41,7 @@ public class StateController : MonoBehaviour
         hitTaken = new HitTaken();
         walkingBackwards = new WalkingBackwards(walkSpeed/2);
         dashing = new Dashing();
+        airDashing = new AirDashing();
         //running = new Running(runSpeed);
 
         SetState(idle);
@@ -73,7 +75,6 @@ public class StateController : MonoBehaviour
         if (state == currentState) return;
         else if (currentState != null) currentState.OnStateExit();
 
-        Debug.Log("State Set!");
         currentState = state;
         currentState.OnStateEnter(this);
     }
@@ -163,7 +164,6 @@ public class StateController : MonoBehaviour
     void OnDash()
     {
         setInput(5);
-        Debug.Log("Dash Input");
     }
     void OnPunch()
     {

@@ -9,7 +9,7 @@ public class Dashing : Grounded
     {
         if(controller.transform.position.y > 0)
         {
-            //controller.SetState(airDash);
+            controller.SetState(controller.airDashing);
         }
 
         if (controller.transform.position.x - controller.opponent.transform.position.x <= 0)

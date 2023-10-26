@@ -42,7 +42,6 @@ public class InAir : State
 
         else
         {
-            Debug.Log("cancelable");
             if (upwardInput.z == 4 || upwardInput.y == 4 ||upwardInput.z == 4)
             {
 
