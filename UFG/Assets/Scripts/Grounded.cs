@@ -37,11 +37,6 @@ public class Grounded : State
             Jump();
     }
 
-    public override void OnPunch()
-    {
-        if (cancel) ;
-            //Punch();
-    }
     public override void OnLeft() //replace with forward function and backward function
     {
         int direction = -1;
@@ -78,6 +73,11 @@ public class Grounded : State
         if (cancel) { }
             //Crouch
 
+    }
+    public override void OnPunch()
+    {
+        if (cancel) { }
+        //Punch();
     }
     public override void OnKick()
     {
