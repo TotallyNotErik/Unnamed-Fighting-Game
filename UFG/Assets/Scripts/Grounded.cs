@@ -6,10 +6,12 @@ public class Grounded : State
 {
     protected override void OnEnter()
     {
+
         //Play Idle Animation
     }
     protected override void OnUpdate()
     {
+
         if (upwardInput.x == 1 || upwardInput.y == 1 || upwardInput.z == 1)
             OnJump();
         else if (upwardInput.z == 4)
@@ -18,8 +20,9 @@ public class Grounded : State
             OnLeft();
         else if (sidewaysInput.z == 3)
             OnRight();
-        else if (sidewaysInput.z == 0)
+        else if (sidewaysInput.z == 0 && moveOver)
             controller.SetState(controller.idle);
+
         OnGroundChildUpdate();
     }
     protected virtual void OnGroundChildUpdate() { }
@@ -42,7 +45,7 @@ public class Grounded : State
     public override void OnLeft() //replace with forward function and backward function
     {
         int direction = -1;
-        if (cancel)
+        if (cancel || moveOver)
         {
             if(forwardBack.z == 9)
             {
@@ -58,7 +61,7 @@ public class Grounded : State
     public override void OnRight() //replace with forward function and backward function
     {
         int direction = 1;
-        if (cancel)
+        if (cancel || moveOver)
         {
             if (forwardBack.z == 9)
             {
@@ -72,18 +75,18 @@ public class Grounded : State
     }
     public override void OnDown()
     {
-        if (cancel) ;
+        if (cancel) { }
             //Crouch
 
     }
     public override void OnKick()
     {
-        if (cancel) ;
+        if (cancel) { }
             //Kick
     }
     public override void OnJab()
     {
-        if (cancel) ;
+        if (cancel) { }
             //Jab
     }
 }

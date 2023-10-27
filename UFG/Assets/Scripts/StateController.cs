@@ -11,7 +11,7 @@ public class StateController : MonoBehaviour
     public Idle idle;
     public InAir inAir;
     public Walking walking;
-    public Running running;
+    public Walking running;
     public HitTaken hitTaken;
     public HeavyHitTaken heavyHitTaken;
     public WalkingBackwards walkingBackwards;
@@ -42,7 +42,7 @@ public class StateController : MonoBehaviour
         walkingBackwards = new WalkingBackwards(walkSpeed/2);
         dashing = new Dashing();
         airDashing = new AirDashing();
-        //running = new Running(runSpeed);
+        running = new Walking(runSpeed);
 
         SetState(idle);
     }

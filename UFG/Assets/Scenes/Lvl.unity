@@ -3208,9 +3208,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   opponent: {fileID: 1261983192}
   i: 0
-  jumpVelocity: 20
-  walkSpeed: 10
-  runSpeed: 20
+  jumpVelocity: 15
+  walkSpeed: 7
+  runSpeed: 14
 --- !u!114 &1900990153
 MonoBehaviour:
   m_ObjectHideFlags: 0

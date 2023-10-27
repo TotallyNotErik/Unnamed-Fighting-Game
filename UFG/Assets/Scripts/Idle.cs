@@ -6,7 +6,9 @@ public class Idle : Grounded
 {
     protected override void OnEnter()
     {
+        AirDashing.airDashes = 2;
         cancel = true;
+        moveOver = true;
     }
 
     protected override void OnGroundChildUpdate()

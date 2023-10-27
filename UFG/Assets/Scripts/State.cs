@@ -5,8 +5,8 @@ using UnityEngine;
 public abstract class State
 {
     public StateController controller;
-
-    protected bool cancel;
+    protected static bool moveOver;
+    protected static bool cancel;
 
     protected static Vector3 sidewaysInput = new Vector3(0,0,0);
     protected static Vector3 upwardInput = new Vector3(0, 0, 0);
@@ -16,6 +16,7 @@ public abstract class State
     {
         this.controller = controller;
         cancel = false;
+        moveOver = false;
         OnEnter();
     }
     protected virtual void OnEnter()
@@ -97,7 +98,8 @@ public abstract class State
     }
     public virtual void OnDash()
     {
-        controller.SetState(controller.dashing);
+        if(cancel)
+            controller.SetState(controller.dashing);
     }
     public virtual void OnKick() { }
     public virtual void OnJab() { }

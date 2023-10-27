@@ -4,31 +4,57 @@ using UnityEngine;
 
 public class AirDashing : State
 {
-    private bool dashended = false;
+    public static int airDashes = 2;
+    private int i = 0;
+    private float dashCoefficient;
     protected override void OnEnter()
     {
-
+        i = 0;
+        if (airDashes <= 0)
+            i = 9;
+        cancel = false;
+        moveOver = false;
         if (controller.transform.position.x - controller.opponent.transform.position.x <= 0)
         {
             if (forwardBack.z == 10)
-                Debug.Log("BackDash air Left");
+            {
+                dashCoefficient = -0.5f;
+            }
+
             else
-                Debug.Log("Dash air Right");
+            {
+                dashCoefficient = 1f;
+            }
+
         }
         else if (controller.transform.position.x - controller.opponent.transform.position.x > 0)
         {
             if (forwardBack.z == 10)
-                Debug.Log("BackDash  air right");
+            {
+                dashCoefficient = 0.5f;
+            }
+
             else
-                Debug.Log("Dash air left");
+            {
+                dashCoefficient = -1f;
+            }
+
         }
-        cancel = true;
-        dashended = true;
+        airDashes--;
     }
 
     protected override void OnUpdate()
     {
-        if (dashended)
+        if (i > 8)
+        {
+            moveOver = true;
             controller.SetState(controller.inAir, 0);
+        }
+        else if (i > 6)
+            cancel = true;
+        if (i > 3)
+            controller.transform.position += new Vector3(controller.walkSpeed * 3 * Time.deltaTime * dashCoefficient, 0, 0);
+        i++;
+
     }
 }

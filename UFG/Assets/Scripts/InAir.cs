@@ -19,6 +19,7 @@ public class InAir : State
         this.InitialVelocity = valueToPass;
         this.takeoffTime = Time.time;
         fastFall = 1;
+        cancel = true;
     }
     protected override void OnUpdate()
     {
@@ -75,5 +76,11 @@ public class InAir : State
     public override void OnJab()
     {
         if (cancel) { }
+    }
+    public override void OnDash()
+    {
+        Debug.Log(AirDashing.airDashes);
+        if (cancel && AirDashing.airDashes > 0)
+            controller.SetState(controller.dashing);
     }
 }
