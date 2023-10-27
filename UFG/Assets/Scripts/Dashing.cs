@@ -47,12 +47,12 @@ public class Dashing : Grounded
     protected override void OnGroundChildUpdate()
     {
 
-        if (i > 3)
+        if (i > 1)
             controller.transform.position += new Vector3(controller.walkSpeed * 3 * Time.deltaTime * dashCoefficient, 0, 0);
 
-        if (i > 6)
+        if (i > 4)
             cancel = true;
-        if (i > 8)
+        if (i > 6)
         {
             moveOver = true;
             controller.SetState(controller.idle);
@@ -62,31 +62,33 @@ public class Dashing : Grounded
 
     public override void OnLeft() 
     {
-        if (cancel || moveOver)
-        {
             if (controller.transform.position.x - controller.opponent.transform.position.x <= 0)
             {
-                controller.SetState(controller.walkingBackwards,-1);
+                if(cancel || moveOver)
+                    controller.SetState(controller.walkingBackwards,-1);
             }
             else if (controller.transform.position.x - controller.opponent.transform.position.x > 0)
             {
-                controller.SetState(controller.running,-1); //change to running
-            }
+
+                controller.SetState(controller.running, -1);
+
         }
+
     }
     public override void OnRight() 
     {
-        if (cancel || moveOver)
-        {
+
+
             if (controller.transform.position.x - controller.opponent.transform.position.x <= 0)
             {
                 controller.SetState(controller.running,1); //change to running
             }
             else if (controller.transform.position.x - controller.opponent.transform.position.x > 0)
             {
-                controller.SetState(controller.walkingBackwards,1);
+                if(cancel||moveOver)
+                    controller.SetState(controller.walkingBackwards,1);
             }
-        }
+
     }
 
     public override void OnKick() { }

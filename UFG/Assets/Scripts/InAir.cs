@@ -8,16 +8,18 @@ public class InAir : State
     private float takeoffTime;
     float lastPosition;
     private int fastFall = 1;
+    private float horizontalVelocity = 0;
 
     public InAir(float InitialVelocity = 10)
     {
         this.InitialVelocity = InitialVelocity;
     }
 
-    protected override void OnEnter(float valueToPass)
+    protected override void OnEnter(float valueToPass, float valueToPassTwo = 0)
     {
         this.InitialVelocity = valueToPass;
         this.takeoffTime = Time.time;
+        horizontalVelocity = valueToPassTwo;
         fastFall = 1;
         cancel = true;
     }
@@ -25,7 +27,7 @@ public class InAir : State
     {
 
         lastPosition = controller.transform.position.y;
-        controller.transform.position += new Vector3(0, (InitialVelocity + -32 * (Time.time - takeoffTime)) * (Time.deltaTime) * fastFall, 0); ;
+        controller.transform.position += new Vector3(horizontalVelocity * Time.deltaTime, (InitialVelocity + -32 * (Time.time - takeoffTime)) * (Time.deltaTime) * fastFall, 0); ;
         if (controller.transform.position.y <= 0 && takeoffTime < Time.time - 0.1)
         {
             controller.transform.position = new Vector3(controller.transform.position.x,0, controller.transform.position.z);
@@ -79,7 +81,7 @@ public class InAir : State
     }
     public override void OnDash()
     {
-        Debug.Log(AirDashing.airDashes);
+
         if (cancel && AirDashing.airDashes > 0)
             controller.SetState(controller.dashing);
     }

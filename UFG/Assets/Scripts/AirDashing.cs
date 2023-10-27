@@ -45,12 +45,12 @@ public class AirDashing : State
 
     protected override void OnUpdate()
     {
-        if (i > 8)
+        if (i > 6)
         {
             moveOver = true;
-            controller.SetState(controller.inAir, 0);
+            controller.SetState(controller.inAir, 0, controller.walkSpeed * 2 * dashCoefficient);
         }
-        else if (i > 6)
+        else if (i > 5)
             cancel = true;
         if (i > 3)
             controller.transform.position += new Vector3(controller.walkSpeed * 3 * Time.deltaTime * dashCoefficient, 0, 0);

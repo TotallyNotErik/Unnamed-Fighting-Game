@@ -27,9 +27,9 @@ public class Grounded : State
     }
     protected virtual void OnGroundChildUpdate() { }
 
-    protected void Jump()
+    protected virtual void Jump()
     {
-        controller.SetState(controller.inAir, controller.jumpVelocity);
+        controller.SetState(controller.inAir, controller.jumpVelocity,0);
     }
     public override void OnJump()
     {

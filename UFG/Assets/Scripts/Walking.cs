@@ -21,6 +21,10 @@ public class Walking : Grounded
     {
         this.walkSpeed = walkSpeed;
     }
+    protected override void Jump()
+    {
+        controller.SetState(controller.inAir, controller.jumpVelocity, walkSpeed);
+    }
     public override void OnLeft() 
     {
         int direction = -1;

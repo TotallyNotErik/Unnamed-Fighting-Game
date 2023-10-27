@@ -67,7 +67,7 @@ public class StateController : MonoBehaviour
      * Otherwise, as long as the current state is not null, it will play the current state's exit function, then set the state to the new state, 
      * then play the new state's enter function
      *
-     * The second function is an overloaded version, solely for handling mid-air state changes (ie. falling and punching at the same time.)
+     * The second function is an overloaded version, but allows for a value to be passed through.
      * it does the exact same function, but also passes a time value into the onStateEnter function.
      */
     public void SetState(State state)
@@ -85,6 +85,14 @@ public class StateController : MonoBehaviour
 
         currentState = state;
         currentState.OnStateEnter(valueToPass, this);
+    }
+    public void SetState(State state, float valueToPassOne, float valueToPassTwo)
+    {
+        if (state == currentState) return;
+        else if (currentState != null) currentState.OnStateExit();
+
+        currentState = state;
+        currentState.OnStateEnter(valueToPassOne,valueToPassTwo, this);
     }
 
     /*This section is to read in inputs and transfer them into the input buffer

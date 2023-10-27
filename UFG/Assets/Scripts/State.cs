@@ -29,7 +29,17 @@ public abstract class State
         this.controller = controller;
         OnEnter(takeOffTime);
     }
-    protected virtual void OnEnter(float valueToPass)
+    public void OnStateEnter(float valueToPassOne, float valueToPassTwo, StateController controller)
+    {
+        //Code here will always run
+        this.controller = controller;
+        OnEnter(valueToPassOne,valueToPassTwo);
+    }
+    protected virtual void OnEnter(float valueToPassOne)
+    {
+
+    }
+    protected virtual void OnEnter(float valueToPassOne, float valueToPassTwo = 0)
     {
 
     }
