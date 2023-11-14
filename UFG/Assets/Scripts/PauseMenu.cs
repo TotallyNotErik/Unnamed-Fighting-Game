@@ -51,6 +51,7 @@ public class PauseMenu : MonoBehaviour
     public void ControlsSceen()
     {
         controlsUI.SetActive(true);
+        pauseMenuUI.SetActive(false);
     }
 
     public void QuitGame()
