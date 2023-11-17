@@ -10,12 +10,17 @@ public class Walking : Grounded
 
     protected override void OnEnter(float movement)
     {
-        moveOver = true;
+        controller.anim.SetBool("Walking", true);
+    moveOver = true;
         cancel = true;
         if (movement < 0)
             walkSpeed = -Mathf.Abs(walkSpeed);
         else if (movement > 0)
             walkSpeed = Mathf.Abs(walkSpeed);
+    }
+    protected override void OnExit()
+    {
+        controller.anim.SetBool("Walking", false);
     }
     public Walking(float walkSpeed)
     {

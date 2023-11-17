@@ -17,12 +17,14 @@ public class InAir : State
 
     protected override void OnEnter(float valueToPass, float valueToPassTwo = 0)
     {
+        controller.anim.SetBool("Jump",true);
         this.InitialVelocity = valueToPass;
         this.takeoffTime = Time.time;
         horizontalVelocity = valueToPassTwo;
         fastFall = 1;
         cancel = true;
     }
+
     protected override void OnUpdate()
     {
 
@@ -30,6 +32,7 @@ public class InAir : State
         controller.transform.position += new Vector3(horizontalVelocity * Time.deltaTime, (InitialVelocity + -32 * (Time.time - takeoffTime)) * (Time.deltaTime) * fastFall, 0); ;
         if (controller.transform.position.y <= 0 && takeoffTime < Time.time - 0.1)
         {
+            controller.anim.SetBool("Jump", false);
             controller.transform.position = new Vector3(controller.transform.position.x,0, controller.transform.position.z);
             controller.SetState(controller.idle);
         }

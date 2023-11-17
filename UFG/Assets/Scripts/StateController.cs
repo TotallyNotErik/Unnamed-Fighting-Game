@@ -17,6 +17,7 @@ public class StateController : MonoBehaviour
     public WalkingBackwards walkingBackwards;
     public Dashing dashing;
     public AirDashing airDashing;
+    public Animator anim;
     [Header("Inputs")]
     public FrameInputs[] inputs = new FrameInputs[30];
     public int i = 0;
@@ -48,6 +49,14 @@ public class StateController : MonoBehaviour
     }
     public void Update ()
     {
+        if (this.transform.position.x - opponent.transform.position.x > 0)
+        {
+            this.transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else
+        {
+            this.transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
+        }
         //setInput(0, 0, 0);
         setInput(inputOne, inputTwo, inputThree);
         i++;
