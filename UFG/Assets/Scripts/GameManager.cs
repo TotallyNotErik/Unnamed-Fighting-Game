@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
             this.hp = hp;
             this.obj = controller.gameObject;
         }
-        //public PlayerInput play;
     }
     public Player[] players = new Player[2];
     public static GameManager instance;
