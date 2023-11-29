@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
@@ -49,6 +50,8 @@ public class StateController : MonoBehaviour
     }
     public void Update ()
     {
+        if (!GameManager.instance.gameStarted)
+        { return; }
         if (this.transform.position.x - opponent.transform.position.x > 0)
         {
             this.transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;

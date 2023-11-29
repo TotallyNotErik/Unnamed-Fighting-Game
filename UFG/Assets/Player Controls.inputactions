@@ -18,27 +18,27 @@
                     "name": "Right",
                     "type": "PassThrough",
                     "id": "b0111ac9-59d7-4202-a51c-8407a9d4683d",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "initialStateCheck": true
                 },
                 {
                     "name": "Left",
                     "type": "PassThrough",
                     "id": "16601337-b613-455a-9f31-ebef882a210f",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "initialStateCheck": true
                 },
                 {
                     "name": "Down",
                     "type": "PassThrough",
                     "id": "6473d5a9-b989-47ed-96f3-c39912d7b890",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "initialStateCheck": true
                 },
                 {
@@ -82,7 +82,7 @@
                 {
                     "name": "",
                     "id": "c0ab3403-0f0c-4723-9728-93b575c0bd12",
-                    "path": "<Gamepad>/buttonNorth",
+                    "path": "<XInputController>/leftStick/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -104,7 +104,7 @@
                 {
                     "name": "",
                     "id": "8999ba79-36ea-433a-a75f-884ef35399b5",
-                    "path": "<Gamepad>/leftStick/right",
+                    "path": "<XInputController>/leftStick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -116,7 +116,7 @@
                     "name": "",
                     "id": "3b33d414-bf03-4bf3-8999-f2cbf0464169",
                     "path": "<Keyboard>/d",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Right",
@@ -126,7 +126,7 @@
                 {
                     "name": "",
                     "id": "30e7999f-d0a6-4c66-8f8e-d02ce26e028b",
-                    "path": "<Gamepad>/leftStick/left",
+                    "path": "<XInputController>/leftStick/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -138,7 +138,7 @@
                     "name": "",
                     "id": "6034f180-03b4-4e0c-962d-1c889b573f5c",
                     "path": "<Keyboard>/a",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Left",
@@ -148,7 +148,7 @@
                 {
                     "name": "",
                     "id": "f9a627bd-741c-4c93-af1c-667c2d041cee",
-                    "path": "<Gamepad>/leftStick/down",
+                    "path": "<XInputController>/leftStick/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
