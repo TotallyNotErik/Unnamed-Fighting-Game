@@ -209,7 +209,6 @@ public class StateController : MonoBehaviour
             inputs[j].Four = inputs[j + 1].Four;
         }
         i = 29;
-        //setInput(0, 0, 0, 0);
     }
     /* clearInputs() will set all inputs to 0, then reset the input frame to 0*/
     void clearInputs()

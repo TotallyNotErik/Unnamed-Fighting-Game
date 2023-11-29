@@ -18,7 +18,7 @@ public class HitTaken : State
     protected override void OnUpdate()
     {
         if ((knockBack * Time.deltaTime - 1 / 2 * 5 * (Time.deltaTime * Time.deltaTime)) >= 0)
-            controller.transform.position.x += knockBack * Time.deltaTime - 1 / 2 * 5 * (Time.deltaTime * Time.deltaTime);
+            controller.transform.position += new Vector3(knockBack * Time.deltaTime - 1 / 2 * 5 * (Time.deltaTime * Time.deltaTime),0,0);
         if(counter >= cantMoveFrames)
         {
             cancel = true;
