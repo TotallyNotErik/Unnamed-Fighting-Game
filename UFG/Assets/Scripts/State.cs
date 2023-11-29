@@ -27,12 +27,16 @@ public abstract class State
     {
         //Code here will always run
         this.controller = controller;
+        cancel = false;
+        moveOver = false;
         OnEnter(takeOffTime);
     }
     public void OnStateEnter(float valueToPassOne, float valueToPassTwo, StateController controller)
     {
         //Code here will always run
         this.controller = controller;
+        cancel = false;
+        moveOver = false;
         OnEnter(valueToPassOne,valueToPassTwo);
     }
     protected virtual void OnEnter(float valueToPassOne)
@@ -68,10 +72,10 @@ public abstract class State
 
     }
 
-    public virtual void OnHit()
+    public virtual void OnHit(int hitStun, float knockBack)
     {
         //Switch to Hit Animation
-        controller.SetState(controller.hitTaken);
+        controller.SetState(controller.hitTaken, (float)hitStun, knockBack);
     }
 
     public virtual void OnJump()
