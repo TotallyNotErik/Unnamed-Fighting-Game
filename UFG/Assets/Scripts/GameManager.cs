@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
             this.controller = controller;
             this.hp = hp;
             this.obj = controller.gameObject;
+            this.controller.id = id;
         }
     }
     public Player[] players = new Player[2];
@@ -42,8 +43,9 @@ public class GameManager : MonoBehaviour
         playerInput.transform.position = new Vector3((playersInGame - 1) * 5, 0, 0);
         playersInGame++;
     }
-    public void Hit()
+    public void Hit(int id, int damage)
     {
+        players[Mathf.Abs(id - 1)].hp -= damage;
         hitSlow = true;
         hitSlowFrames = 0;
     }

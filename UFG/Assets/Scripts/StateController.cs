@@ -38,6 +38,7 @@ public class StateController : MonoBehaviour
     public float jumpVelocity;
     public float walkSpeed;
     public float runSpeed;
+    public int id;
 
 
     void Start()
@@ -52,7 +53,7 @@ public class StateController : MonoBehaviour
         running = new Walking(runSpeed);
         punching = new Punching(8, 5, 8);
         kicking = new Kicking(12, 10, 12);
-        jabbing = new Jabbing(6, 3, 6);
+        jabbing = new Jabbing(6, 3, 4);
         blocking = new Blocking();
 
         SetState(idle);

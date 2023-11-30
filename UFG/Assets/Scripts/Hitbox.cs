@@ -16,7 +16,7 @@ public class Hitbox : MonoBehaviour
         else
         {
             col.transform.parent.parent.gameObject.GetComponent<StateController>().currentState.OnHit(hitStun, knockBack);
-            GameManager.instance.Hit();
+            GameManager.instance.Hit(this.transform.parent.parent.gameObject.GetComponent<StateController>().id, (int)knockBack);
         }
     }
 }
