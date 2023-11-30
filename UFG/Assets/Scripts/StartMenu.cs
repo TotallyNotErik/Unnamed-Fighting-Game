@@ -11,7 +11,8 @@ public class StartMenu : MonoBehaviour
     public GameObject optionsScreen;
     public GameObject creditsScreen;
     public GameObject singlemultiScreen;
-
+    public Animator[] anim;
+    private int index = 0;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -20,15 +21,15 @@ public class StartMenu : MonoBehaviour
             optionsScreen.SetActive(false);
             creditsScreen.SetActive(false);
             singlemultiScreen.SetActive(false);
+            index = 0;
         }
     }
 
     public void StartButton()
     {
-        titleScreen.SetActive(false);
-        optionsScreen.SetActive(false);
-        creditsScreen.SetActive(false);
-        singlemultiScreen.SetActive(true);
+        this.transform.GetChild(index).gameObject.GetComponent<ButtonActive>().nextScreen = singlemultiScreen;
+        anim[index].SetTrigger("StartButton");
+        index = 3;
     }
     public void OptionsButton()
     {
@@ -44,6 +45,7 @@ public class StartMenu : MonoBehaviour
 
     public void SinglePlayerButton()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        anim[3].SetTrigger("MPB");
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
