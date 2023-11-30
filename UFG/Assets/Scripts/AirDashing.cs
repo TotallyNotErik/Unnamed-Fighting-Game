@@ -52,7 +52,7 @@ public class AirDashing : State
         }
         else if (i > 5)
             cancel = true;
-        if (i > 3)
+        if (i > 3 && Mathf.Abs(controller.transform.position.x + controller.walkSpeed * 3 * Time.deltaTime * dashCoefficient) < 10)
             controller.transform.position += new Vector3(controller.walkSpeed * 3 * Time.deltaTime * dashCoefficient, 0, 0);
         i++;
 

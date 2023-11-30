@@ -9,7 +9,7 @@ public class WalkingBackwards : Walking
 
     public override void OnHit(int hitStun, float knockBack)
     {
-        //change to block
+        controller.SetState(controller.blocking, hitStun, knockBack);
     }
 
 }

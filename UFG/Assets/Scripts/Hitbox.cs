@@ -7,14 +7,15 @@ public class Hitbox : MonoBehaviour
     public int hitStun;
     public float knockBack;
 
-    void OnTriggerEnter2D(Collider2D col)
+    public void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.transform == this.transform.parent.parent)
+        if (col.transform.parent == this.transform.parent)
         {
             return;
         }
-        else {
-            col.gameObject.GetComponent<StateController>().currentState.OnHit(hitStun, knockBack);
+        else
+        {
+            col.transform.parent.parent.gameObject.GetComponent<StateController>().currentState.OnHit(hitStun, knockBack);
             GameManager.instance.Hit();
         }
     }

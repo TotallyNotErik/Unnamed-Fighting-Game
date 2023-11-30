@@ -47,7 +47,7 @@ public class Dashing : Grounded
     protected override void OnGroundChildUpdate()
     {
 
-        if (i > 1)
+        if (i > 1 && Mathf.Abs(controller.transform.position.x + controller.walkSpeed * 3 * Time.deltaTime * dashCoefficient) < 10)
             controller.transform.position += new Vector3(controller.walkSpeed * 3 * Time.deltaTime * dashCoefficient, 0, 0);
 
         if (i > 4)

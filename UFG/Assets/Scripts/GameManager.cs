@@ -65,11 +65,12 @@ public class GameManager : MonoBehaviour
 
         if(hitSlow)
         {
-            Time.timeScale = 0.5f;
+            Time.timeScale = 0f;
             hitSlowFrames++;
-            if (hitSlowFrames > 3)
+            if (hitSlowFrames > 5)
             {
                 hitSlow = !hitSlow;
+                Time.timeScale = 1f;
             }
         }
     }

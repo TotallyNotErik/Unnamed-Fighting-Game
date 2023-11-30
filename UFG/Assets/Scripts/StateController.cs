@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.InteropServices.ComTypes;
@@ -18,7 +19,11 @@ public class StateController : MonoBehaviour
     public WalkingBackwards walkingBackwards;
     public Dashing dashing;
     public AirDashing airDashing;
+    public Punching punching;
+    public Kicking kicking;
+    public Jabbing jabbing;
     public Animator anim;
+    public Blocking blocking;
     [Header("Inputs")]
     public FrameInputs[] inputs = new FrameInputs[30];
     public int i = 0;
@@ -45,6 +50,10 @@ public class StateController : MonoBehaviour
         dashing = new Dashing();
         airDashing = new AirDashing();
         running = new Walking(runSpeed);
+        punching = new Punching(8, 5, 8);
+        kicking = new Kicking(12, 10, 12);
+        jabbing = new Jabbing(6, 3, 6);
+        blocking = new Blocking();
 
         SetState(idle);
     }

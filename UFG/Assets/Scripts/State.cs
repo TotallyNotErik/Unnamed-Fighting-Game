@@ -138,11 +138,6 @@ public abstract class State
                 forwardBack.y = (int)controller.inputs[Mathf.Clamp(controller.i - 1, 0, 29)].Four;
                 forwardBack.z = (int)controller.inputs[controller.i].Four;
 
-        //Debug.Log(sidewaysInput);
-        //Debug.Log(upwardInput);
-        //Debug.Log(actionInput);
-        //Debug.Log(forwardBack);
-
     }
 
 }

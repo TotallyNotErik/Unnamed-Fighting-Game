@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Threading;
 using UnityEngine;
 
@@ -37,7 +38,7 @@ public class Walking : Grounded
         {
             if (forwardBack.z == 9)
             {
-                controller.SetState(this, direction);
+                controller.SetState(controller.walking, direction);
             }
             else if (forwardBack.z == 10)
             {
@@ -52,7 +53,7 @@ public class Walking : Grounded
         {
             if (forwardBack.z == 9)
             {
-                controller.SetState(this, direction);
+                controller.SetState(controller.walking, direction);
             }
             else if (forwardBack.z == 10)
             {
@@ -63,6 +64,8 @@ public class Walking : Grounded
     }
     protected override void OnGroundChildUpdate()
     {
-        controller.transform.position += new Vector3(walkSpeed * Time.deltaTime,0,0);
+        if(Mathf.Abs(controller.transform.position.x + walkSpeed*Time.deltaTime) > 10) { return; }
+        else
+            controller.transform.position += new Vector3(walkSpeed * Time.deltaTime,0,0);
     }
 }

@@ -14,13 +14,19 @@ public class Grounded : State
 
         if (upwardInput.x == 1 || upwardInput.y == 1 || upwardInput.z == 1)
             OnJump();
+        else if (actionInput.x == 6 || actionInput.x == 6 || actionInput.x == 6)
+            OnPunch();
+        else if (actionInput.x == 7 || actionInput.x == 7 || actionInput.x == 7)
+            OnKick();
+        else if (actionInput.x == 8 || actionInput.x == 8 || actionInput.x == 8)
+            OnJab();
         else if (upwardInput.z == 4)
             OnDown();
         else if (sidewaysInput.z == 2)
             OnLeft();
         else if (sidewaysInput.z == 3)
             OnRight();
-        else if (sidewaysInput.z == 0 && moveOver)
+        else if (sidewaysInput.z == 0 && moveOver && cancel)
             controller.SetState(controller.idle);
 
         OnGroundChildUpdate();
@@ -76,17 +82,17 @@ public class Grounded : State
     }
     public override void OnPunch()
     {
-        if (cancel) { }
+        if (cancel) { controller.SetState(controller.punching); }
         //Punch();
     }
     public override void OnKick()
     {
-        if (cancel) { }
+        if (cancel) { controller.SetState(controller.kicking); }
             //Kick
     }
     public override void OnJab()
     {
-        if (cancel) { }
+        if (cancel) { controller.SetState(controller.jabbing); }
             //Jab
     }
 }
