@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     //public StateController[] controllers;
     public int playersInGame = 0;
     public bool gameStarted = false;
+    public bool hitSlow = false;
+    private int hitSlowFrames;
     void Awake()
     {
         instance = this;
@@ -38,9 +40,14 @@ public class GameManager : MonoBehaviour
     public void OnPlayerJoined(PlayerInput playerInput)
     {
         players[playersInGame] = new Player(playersInGame + 1, 100,playerInput.gameObject.GetComponent<StateController>());
+        playerInput.transform.position = new Vector3((playersInGame - 1) * 5, 0, 0);
         playersInGame++;
     }
-
+    public void Hit()
+    {
+        hitSlow = true;
+        hitSlowFrames = 0;
+    }
     void Update()
     {
         if(!gameStarted) { 
@@ -54,6 +61,16 @@ public class GameManager : MonoBehaviour
                 players[1].controller.opponent = players[0].obj;
                 Time.timeScale = 1f;
                 gameStarted = true;
+            }
+        }
+
+        if(hitSlow)
+        {
+            Time.timeScale = 0.5f;
+            hitSlowFrames++;
+            if (hitSlowFrames > 3)
+            {
+                hitSlow = !hitSlow;
             }
         }
     }

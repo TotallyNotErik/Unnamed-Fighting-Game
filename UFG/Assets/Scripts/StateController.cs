@@ -54,11 +54,11 @@ public class StateController : MonoBehaviour
         { return; }
         if (this.transform.position.x - opponent.transform.position.x > 0)
         {
-            this.transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
+            this.transform.localScale = new Vector3(-1,1,1);
         }
         else
         {
-            this.transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
+            this.transform.localScale = new Vector3(1, 1, 1);
         }
         //setInput(0, 0, 0);
         setInput(inputOne, inputTwo, inputThree);
