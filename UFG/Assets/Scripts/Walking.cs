@@ -38,7 +38,7 @@ public class Walking : Grounded
         {
             if (forwardBack.z == 9)
             {
-                controller.SetState(controller.walking, direction);
+                controller.SetState(this, direction);
             }
             else if (forwardBack.z == 10)
             {
@@ -53,7 +53,7 @@ public class Walking : Grounded
         {
             if (forwardBack.z == 9)
             {
-                controller.SetState(controller.walking, direction);
+                controller.SetState(this, direction);
             }
             else if (forwardBack.z == 10)
             {
