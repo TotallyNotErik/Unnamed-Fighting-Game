@@ -1,7 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/* State is the base abstract class that every other class inherits from.
+ * State has 6 main functions, 3 sets of 2: one that cannot be overridden by children, but instead calls an overridable version so that some code will always run regardless of overrides.
+ * State also contains functions to read in the last 3 values of the input buffer for the most recent action inputs.
+ * Also contains functions to allow for overriding of action functions
+ */
 public abstract class State
 {
     public StateController controller;
@@ -39,14 +43,8 @@ public abstract class State
         moveOver = false;
         OnEnter(valueToPassOne,valueToPassTwo);
     }
-    protected virtual void OnEnter(float valueToPassOne)
-    {
-
-    }
-    protected virtual void OnEnter(float valueToPassOne, float valueToPassTwo = 0)
-    {
-
-    }
+    protected virtual void OnEnter(float valueToPassOne) { }
+    protected virtual void OnEnter(float valueToPassOne, float valueToPassTwo = 0) { }
 
     public void OnStateUpdate()
     {
@@ -56,21 +54,15 @@ public abstract class State
             OnDash();
         OnUpdate();
     }
-    protected virtual void OnUpdate()
-    {
-
-    }
+    protected virtual void OnUpdate() { }
 
     public void OnStateExit()
-    {
+ {
         //Code here will always run
         cancel = false;
         OnExit();
     }
-    protected virtual void OnExit()
-    {
-
-    }
+    protected virtual void OnExit()  { }
 
     public virtual void OnHit(int hitStun, float knockBack)
     {
@@ -78,14 +70,8 @@ public abstract class State
         controller.SetState(controller.hitTaken, (float)hitStun, knockBack);
     }
 
-    public virtual void OnJump()
-    {
-
-    }
-    public virtual void OnPunch()
-    {
-
-    }
+    public virtual void OnJump() { }
+    public virtual void OnPunch() { }
     public virtual void OnLeft()
     {
         if (controller.transform.position.x - controller.opponent.transform.position.x < 0)
@@ -106,10 +92,7 @@ public abstract class State
             OnBackward();
         }
     }
-    public virtual void OnDown()
-    {
-
-    }
+    public virtual void OnDown() {}
     public virtual void OnDash()
     {
         if(cancel)
@@ -117,9 +100,9 @@ public abstract class State
     }
     public virtual void OnKick() { }
     public virtual void OnJab() { }
-
     public virtual void OnForward() { }
     public virtual void OnBackward() { }
+    /*Reads the input buffer and inputs it into 4 seperate vectors to allow for easier reading by the states*/
     private void readInputBuffer() 
     {
                 sidewaysInput.x = (int)controller.inputs[Mathf.Clamp(controller.i - 2, 0, 29)].One;

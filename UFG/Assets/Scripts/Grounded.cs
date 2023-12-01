@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/* Grounded is the base state for any On-the-ground actions
+ * Allows for inputs to be taken at any point, so creates a new overridable function to allow for even more code to be guaranteed to run.
+ */
 public class Grounded : State
 {
     protected override void OnEnter()
@@ -77,22 +80,17 @@ public class Grounded : State
     public override void OnDown()
     {
         if (cancel) { }
-            //Crouch
-
     }
     public override void OnPunch()
     {
         if (cancel) { controller.SetState(controller.punching); }
-        //Punch();
     }
     public override void OnKick()
     {
         if (cancel) { controller.SetState(controller.kicking); }
-            //Kick
     }
     public override void OnJab()
     {
         if (cancel) { controller.SetState(controller.jabbing); }
-            //Jab
     }
 }

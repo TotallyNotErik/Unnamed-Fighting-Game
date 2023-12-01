@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
+/*The HitTaken class will cancel any current actions and lock the user into a hitstun*/
 public class HitTaken : State
 {
     private int cantMoveFrames = 0;
@@ -10,6 +11,7 @@ public class HitTaken : State
     private float knockBack;
     private float deceleration = 5f;
     private int coefficient;
+
    protected override void OnEnter(float valueToPassOne, float valueToPassTwo)
     {
         counter = 0;

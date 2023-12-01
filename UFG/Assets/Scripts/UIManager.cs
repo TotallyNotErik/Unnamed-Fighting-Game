@@ -13,16 +13,17 @@ public class UIManager : MonoBehaviour
     {
         instance = this;
     }
+    /*Starts the game and removes the waiting screen*/
     public void StopWaiting()
     {
         WaitingScreen.SetTrigger("DoneWaiting");
     }
-    // Update is called once per frame
-
+    /*Updates the UI health bar*/
     public void UpdateHealthBar(int playerId)
     {
         healthbars[playerId].transform.GetChild(0).GetComponent<Image>().fillAmount = (float)GameManager.instance.players[playerId].hp / 100f;
     }
+    /*Sets the winscreen active and changes the text to the player id number*/
     public void WinGame(int id)
     {
         WinScreen.SetActive(true);

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
-
+/*The Blocking class will create a shield in front of the player, and reduce hitstun and knockback taken when hit.*/
 public class Blocking : State
 {
     int hitstaken = 0;

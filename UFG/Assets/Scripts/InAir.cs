@@ -9,12 +9,11 @@ public class InAir : State
     float lastPosition;
     private int fastFall = 1;
     private float horizontalVelocity = 0;
-
     public InAir(float InitialVelocity = 10)
     {
         this.InitialVelocity = InitialVelocity;
     }
-
+    /*OnEnter will set initial velocitie for the OnUpdate function to perform physics calculations*/
     protected override void OnEnter(float valueToPass, float valueToPassTwo = 0)
     {
         controller.anim.SetBool("Jump",true);
@@ -24,7 +23,7 @@ public class InAir : State
         fastFall = 1;
         cancel = true;
     }
-
+    /*OnUpdate will move the character up and down according to regular physics, and allows for a fastfall input at the peak of the jump*/
     protected override void OnUpdate()
     {
 
@@ -60,7 +59,7 @@ public class InAir : State
 
         }
     }
-
+    /*The base class Input Functions must be overrided to do nothing so no states can accidentally be changed mid-air*/
     public override void OnPunch()
     {
         if (cancel) { }
@@ -85,6 +84,7 @@ public class InAir : State
     {
         if (cancel) { }
     }
+    /*Players can still dash mid-air*/
     public override void OnDash()
     {
 

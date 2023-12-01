@@ -7,6 +7,7 @@ public class AirDashing : State
     public static int airDashes = 2;
     private int i = 0;
     private float dashCoefficient;
+    /*OnEnter will determine DashSpeed and direction based off of curent userInputs*/
     protected override void OnEnter()
     {
         i = 0;
@@ -43,6 +44,7 @@ public class AirDashing : State
         airDashes--;
     }
 
+    /*OnUpdate will move the character according to gravity and the dash speed*/
     protected override void OnUpdate()
     {
         if (i > 6)

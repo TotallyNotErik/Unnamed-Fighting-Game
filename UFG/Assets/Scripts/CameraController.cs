@@ -7,6 +7,10 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public Camera cam;
+    /*The Camera controller function will zoom ouut the camera if both players are a certain distance apart
+     * If the players are close together, the camera will stay still and not zoom in or out
+     * If both players move out of the sight of the camera, the camera will move to show both characters
+     */
     void Update()
     {
         if (GameManager.instance.gameStarted)

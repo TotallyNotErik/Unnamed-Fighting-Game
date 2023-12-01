@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -60,6 +61,7 @@ public class StateController : MonoBehaviour
         SetState(idle);
 
     }
+    /*Allows for children classes add stuff to Start that is unique to them*/
     protected virtual void OverrideStart()
     {
 
@@ -68,6 +70,11 @@ public class StateController : MonoBehaviour
     {
         if (!GameManager.instance.gameStarted || GameManager.instance.gameWon)
         { return; }
+        else
+        {
+            if (id == 2)
+            this.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0, 134, 157, 255);
+        }
         if (this.transform.position.x - opponent.transform.position.x > 0)
         {
             this.transform.localScale = new Vector3(-1,1,1);
@@ -84,7 +91,7 @@ public class StateController : MonoBehaviour
         currentState.OnStateUpdate();
         OverriddenUpdate();
     }
-
+    /*Allows for children classes to add stuff that is unique to them */
     protected virtual void OverriddenUpdate ()
     {
 

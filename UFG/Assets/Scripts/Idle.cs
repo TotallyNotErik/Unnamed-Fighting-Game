@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*The idle class does nothing but play an animation, but allows for any action to be taken*/
 public class Idle : Grounded
 {
     protected override void OnEnter()
@@ -14,14 +15,6 @@ public class Idle : Grounded
 
     protected override void OnGroundChildUpdate()
     {
-        //Down
-            //Crouch
-
-        //Forward
-            //Walk
-
-        //Back
-            //WalkBackwards?
     }
 
 }

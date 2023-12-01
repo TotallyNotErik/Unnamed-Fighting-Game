@@ -7,6 +7,8 @@ public class Dashing : Grounded
 
     private int i = 0;
     private float dashCoefficient;
+
+    /*OnEnter will Determine the direction and speed of the dash depending on userInput*/
     protected override void OnEnter()
     {
         if (controller.transform.position.y > 0)
@@ -44,6 +46,7 @@ public class Dashing : Grounded
         cancel = false;
         moveOver = false;
     }
+    /* Overrides the GroundChildUpdate to move the character for x amount of frames */
     protected override void OnGroundChildUpdate()
     {
 
@@ -60,6 +63,7 @@ public class Dashing : Grounded
         i++;
     }
 
+    /*Sets the player to running after a dash*/
     public override void OnLeft() 
     {
             if (controller.transform.position.x - controller.opponent.transform.position.x <= 0)
@@ -81,7 +85,7 @@ public class Dashing : Grounded
 
             if (controller.transform.position.x - controller.opponent.transform.position.x <= 0)
             {
-                controller.SetState(controller.running,1); //change to running
+                controller.SetState(controller.running,1);
             }
             else if (controller.transform.position.x - controller.opponent.transform.position.x > 0)
             {
@@ -91,11 +95,8 @@ public class Dashing : Grounded
 
     }
 
+    /*Since you can't kick Jab or Punch during a dash, override the functions to do nothing*/
     public override void OnKick() { }
     public override void OnJab() { }
-    public override void OnPunch()
-    {
-
-    }
-
+    public override void OnPunch() { }
 }
