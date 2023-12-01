@@ -43,6 +43,7 @@ public class StateController : MonoBehaviour
 
     void Start()
     {
+        OverrideStart();
         idle = new Idle();
         inAir = new InAir(jumpVelocity);
         walking = new Walking(walkSpeed);
@@ -57,10 +58,15 @@ public class StateController : MonoBehaviour
         blocking = new Blocking();
 
         SetState(idle);
+
+    }
+    protected virtual void OverrideStart()
+    {
+
     }
     public void Update ()
     {
-        if (!GameManager.instance.gameStarted)
+        if (!GameManager.instance.gameStarted || GameManager.instance.gameWon)
         { return; }
         if (this.transform.position.x - opponent.transform.position.x > 0)
         {

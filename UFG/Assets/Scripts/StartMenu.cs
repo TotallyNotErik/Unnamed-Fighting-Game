@@ -45,7 +45,10 @@ public class StartMenu : MonoBehaviour
 
     public void SinglePlayerButton()
     {
+        anim[3].SetTrigger("SPB");
+    }
+    public void MultiplayerButton()
+    {
         anim[3].SetTrigger("MPB");
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

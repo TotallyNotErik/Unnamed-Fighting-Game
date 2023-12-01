@@ -19,7 +19,7 @@ public class CameraController : MonoBehaviour
             if (Mathf.Abs(GameManager.instance.players[0].controller.transform.position.x - GameManager.instance.players[1].controller.transform.position.x) < 14 && cam.orthographicSize > 7)
             {
                 cam.orthographicSize -= (cam.orthographicSize - 7) * 3 / 30;
-                if(Mathf.Abs(this.transform.position.x -GameManager.instance.players[0].controller.transform.position.x) > 7 || Mathf.Abs(this.transform.position.x - GameManager.instance.players[1].controller.transform.position.x) > 7)
+                if(Mathf.Abs(this.transform.position.x -GameManager.instance.players[0].controller.transform.position.x) > 7 && Mathf.Abs(this.transform.position.x - GameManager.instance.players[1].controller.transform.position.x) > 7)
                 {
                     this.transform.position = new Vector3(this.transform.position.x + (GameManager.instance.players[0].controller.transform.position.x-this.transform.position.x) / Mathf.Abs(GameManager.instance.players[0].controller.transform.position.x - this.transform.position.x) * 7/30, cam.orthographicSize - 3, -10);
                 }

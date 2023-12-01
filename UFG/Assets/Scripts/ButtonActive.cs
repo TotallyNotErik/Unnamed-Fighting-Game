@@ -13,4 +13,8 @@ public class ButtonActive : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+    public void SinglePlayerScene()
+    {
+        SceneManager.LoadScene(2);
+    }
 }

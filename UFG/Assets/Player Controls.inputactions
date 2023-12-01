@@ -103,6 +103,17 @@
                 },
                 {
                     "name": "",
+                    "id": "01b06762-de7a-44f4-ab4a-74c2c84465a5",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "8999ba79-36ea-433a-a75f-884ef35399b5",
                     "path": "<XInputController>/leftStick/right",
                     "interactions": "",
@@ -181,7 +192,7 @@
                 {
                     "name": "",
                     "id": "26020116-b098-4b8a-a6ae-19c222fc2596",
-                    "path": "",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -202,8 +213,30 @@
                 },
                 {
                     "name": "",
+                    "id": "404dfc78-f559-47e6-84de-1c1f054f561f",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Kick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "4a4b355a-7784-4ce4-aa8f-22c0a0dd40cb",
                     "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1f49c4fb-9c00-4e2c-a638-1d866be03972",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

@@ -990,7 +990,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1130936105}
         m_TargetAssemblyTypeName: StartMenu, Assembly-CSharp
-        m_MethodName: SinglePlayerButton
+        m_MethodName: MultiplayerButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1419,7 +1419,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &816966685
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2295,6 +2295,7 @@ GameObject:
   - component: {fileID: 1438780271}
   - component: {fileID: 1438780270}
   - component: {fileID: 1438780273}
+  - component: {fileID: 1438780274}
   m_Layer: 5
   m_Name: SinglePlayerButton
   m_TagString: Untagged
@@ -2438,6 +2439,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &1438780274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438780268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da46783444bdfe849931fc73b34040df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextScreen: {fileID: 0}
 --- !u!1 &1481282043
 GameObject:
   m_ObjectHideFlags: 0
@@ -2669,7 +2683,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1646437869
 RectTransform:
   m_ObjectHideFlags: 0

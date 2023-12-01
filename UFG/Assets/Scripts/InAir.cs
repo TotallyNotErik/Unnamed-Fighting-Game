@@ -32,7 +32,7 @@ public class InAir : State
         if (Mathf.Abs(controller.transform.position.x + horizontalVelocity * Time.deltaTime) < 10)
             controller.transform.position += new Vector3(horizontalVelocity * Time.deltaTime, (InitialVelocity + -32 * (Time.time - takeoffTime)) * (Time.deltaTime) * fastFall, 0); 
         else
-            controller.transform.position += new Vector3(controller.transform.position.x, (InitialVelocity + -32 * (Time.time - takeoffTime)) * (Time.deltaTime) * fastFall, 0);
+            controller.transform.position += new Vector3(0, (InitialVelocity + -32 * (Time.time - takeoffTime)) * (Time.deltaTime) * fastFall, 0);
         if (controller.transform.position.y <= 0 && takeoffTime < Time.time - 0.1)
         {
             controller.anim.SetBool("Jump", false);
