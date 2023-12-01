@@ -43,9 +43,8 @@ public class PauseMenu : MonoBehaviour
 
     public void LRestart()
     {
-        Debug.Log("Restarting level...");
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(0);
     }
 
     public void ControlsSceen()
@@ -56,6 +55,6 @@ public class PauseMenu : MonoBehaviour
 
     public void QuitGame()
     {
-        Debug.Log("Quitting game...");
+        Application.Quit();
     }
 }
