@@ -8,6 +8,7 @@ public class ButtonActive : MonoBehaviour
     {
         nextScreen.SetActive(true);
         this.transform.gameObject.SetActive(false);
+        StartMenu.instance.index += 1;
     }
     /*Allows for animations to change the scene*/
     public void MultiplayerScene()

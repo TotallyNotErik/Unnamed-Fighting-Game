@@ -11,17 +11,6 @@ public class PlayerInfo : MonoBehaviour
 
     public static PlayerInfo instance;
     void Awake(){instance = this;}
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void OnLoggedIn()
     {
@@ -39,6 +28,9 @@ public class PlayerInfo : MonoBehaviour
             {
                 profile = result.PlayerProfile;
                 Debug.Log("Loaded in player: " + profile.DisplayName);
+                NetworkManager.instance.SetNickName(profile.DisplayName);
+                StartMenu.instance.index = 6;
+                StartMenu.instance.SetScreen(6);
             },
             error => Debug.Log(error.ErrorMessage)
         );
