@@ -1,4 +1,5 @@
-#Unnamed Fighting Game
+**Unnamed Fighting Game**
+
 Controls:
 Keyboard: WASD for movement, Space to Jump, J K L attack, L-Shift to dash
 
