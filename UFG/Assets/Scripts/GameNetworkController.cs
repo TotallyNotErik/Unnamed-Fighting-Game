@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
+
 using System;
 
 public class GameNetworkController : MonoBehaviourPunCallbacks
@@ -58,7 +58,7 @@ public class GameNetworkController : MonoBehaviourPunCallbacks
     [PunRPC]
     void SpawnPlayer()
     {
-        GameObject playerobj = PhotonNetwork.Instantiate(playerPrefabLocation, new Vector3(0,3,0), Quaternion.identity);
+        GameObject playerobj = PhotonNetwork.Instantiate(playerPrefabLocation, new Vector3(0,0,0), Quaternion.identity);
         playerobj.GetComponent<NetworkController>().photonView.RPC("Initialize", RpcTarget.All, PhotonNetwork.LocalPlayer);
     }
     /*MakeBot() will create a StateController with no link to an input system, which will do nothing*/
@@ -76,11 +76,11 @@ public class GameNetworkController : MonoBehaviourPunCallbacks
     public void Hit(int id, int damage)
     {
         players[Mathf.Abs(id - 1)].hp -= damage;
-        if (players[Mathf.Abs(id - 1)].hp <= 0)
+        if (players[Mathf.Abs(id - 1)].hp <= 0 && PhotonNetwork.IsMasterClient)
         {
             gameWon = true;
             OnluneUIManager.instance.photonView.RPC("WinGame", RpcTarget.All, (Mathf.Abs(id - 2) + 1));
-            Invoke("BacktoTitle", 5f);
+
         }
         hitSlow = true;
         hitSlowFrames = 0;
@@ -116,9 +116,5 @@ public class GameNetworkController : MonoBehaviourPunCallbacks
             }
         }
     }
-    /*Dummy Function that allows the invoking of changing scenes.*/
-    void BacktoTitle()
-    {
-        SceneManager.LoadScene(0);
-    }
+
 }

@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class Leaderboard : MonoBehaviour
     public GameObject[] leaderboardEntries;
 
     public static Leaderboard instance;
-    void Awake(){ instance = this; }
+    void Awake() { instance = this; }
 
     public void OnLoggedIn()
     {
@@ -25,8 +26,8 @@ public class Leaderboard : MonoBehaviour
 
         GetLeaderboardRequest getLeaderboardRequest = new GetLeaderboardRequest
         {
-            StatisticName = "MostClicks",
-            MaxResultsCount = 10
+            StatisticName = "Most Wins",
+            MaxResultsCount = 30
         };
 
         PlayFabClientAPI.GetLeaderboard(getLeaderboardRequest,
@@ -47,7 +48,7 @@ public class Leaderboard : MonoBehaviour
                 continue;
 
             leaderboardEntries[x].transform.Find("PlayerName").GetComponent<TextMeshProUGUI>().text = (leaderboard[x].Position + 1) + ". " + leaderboard[x].DisplayName;
-            leaderboardEntries[x].transform.Find("ScoreText").GetComponent<TextMeshProUGUI>().text = ((int)leaderboard[x].StatValue).ToString();
+            leaderboardEntries[x].transform.Find("ScoreText").GetComponent<TextMeshProUGUI>().text = ((int)(leaderboard[x].StatValue / 2)).ToString();
         }
     }
 
@@ -65,7 +66,6 @@ public class Leaderboard : MonoBehaviour
             result =>
             {
                 Debug.Log("Success!" + newScore);
-                DisplayLeaderboard();
             },
             error =>
             {
@@ -74,7 +74,8 @@ public class Leaderboard : MonoBehaviour
             }
             );
 
-    } 
+    }
 
-    
+
 }
+

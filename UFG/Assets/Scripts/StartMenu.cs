@@ -44,6 +44,10 @@ public class StartMenu : MonoBehaviourPunCallbacks, ILobbyCallbacks
                 index = 6;
                 PhotonNetwork.LeaveRoom();
             }
+            else if(index == 9)
+            {
+                index = 6;
+            }
             else
                 index -= 1;
             SetScreen(index);
@@ -60,6 +64,7 @@ public class StartMenu : MonoBehaviourPunCallbacks, ILobbyCallbacks
                 screens[j].SetActive(false);
             }
         }
+        index = screen;
     }
 
     public void StartButton()

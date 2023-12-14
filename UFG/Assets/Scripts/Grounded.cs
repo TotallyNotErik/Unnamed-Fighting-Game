@@ -17,11 +17,11 @@ public class Grounded : State
 
         if (upwardInput.x == 1 || upwardInput.y == 1 || upwardInput.z == 1)
             OnJump();
-        else if (actionInput.x == 6 || actionInput.x == 6 || actionInput.x == 6)
+        else if (actionInput.x == 6 || actionInput.y == 6 || actionInput.z == 6)
             OnPunch();
-        else if (actionInput.x == 7 || actionInput.x == 7 || actionInput.x == 7)
+        else if (actionInput.x == 7 || actionInput.y == 7 || actionInput.z == 7)
             OnKick();
-        else if (actionInput.x == 8 || actionInput.x == 8 || actionInput.x == 8)
+        else if (actionInput.x == 8 || actionInput.y == 8 || actionInput.z == 8)
             OnJab();
         else if (upwardInput.z == 4)
             OnDown();

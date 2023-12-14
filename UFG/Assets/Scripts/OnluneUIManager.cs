@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using TMPro;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class OnluneUIManager : MonoBehaviourPunCallbacks
 {
@@ -33,7 +35,12 @@ public class OnluneUIManager : MonoBehaviourPunCallbacks
     public void WinGame(int id)
     {
         WinScreen.SetActive(true);
+        if (GameNetworkController.instance.players[id-1].obj.GetComponent<PhotonView>().IsMine && GameNetworkController.instance.players[id - 1].obj.GetComponent<PlayerInput>().enabled == true)
+        {
+            Leaderboard.instance.SetLeaderboardEntry(1);
+        }
         WinScreen.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = PhotonNetwork.PlayerList[id-1].NickName + " wins!";
+        Invoke("BacktoTitle", 5f);
     }
     void Update()
     {
@@ -45,5 +52,9 @@ public class OnluneUIManager : MonoBehaviourPunCallbacks
             }
         }
     }
-
+    /*Dummy Function that allows the invoking of changing scenes.*/
+    void BacktoTitle()
+    {
+        SceneManager.LoadScene(0);
+    }
 }
