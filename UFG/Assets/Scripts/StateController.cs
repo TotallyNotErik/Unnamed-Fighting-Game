@@ -6,8 +6,10 @@ using System.ComponentModel;
 using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
+using Photon.Pun;
 
-public class StateController : MonoBehaviour
+
+public class StateController : MonoBehaviour, IPunObservable
 {
     [Header("State Machine Information")]
     public GameObject opponent;
@@ -25,12 +27,17 @@ public class StateController : MonoBehaviour
     public Jabbing jabbing;
     public Animator anim;
     public Blocking blocking;
+    public virtual bool isOnline() { return false; }
     [Header("Inputs")]
     public FrameInputs[] inputs = new FrameInputs[30];
     public int i = 0;
+    [SerializeField]
     private int inputOne;
+    [SerializeField]
     private int inputTwo;
+    [SerializeField]
     private int inputThree;
+    
 
 
 
@@ -66,14 +73,26 @@ public class StateController : MonoBehaviour
     {
 
     }
-    public void Update ()
+    public void Update()
     {
-        if (!GameManager.instance.gameStarted || GameManager.instance.gameWon)
-        { return; }
+        if (!isOnline()) { 
+            if (!GameManager.instance.gameStarted || GameManager.instance.gameWon)
+            { return; }
+            else
+            {
+                if (id == 2)
+                    this.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0, 134, 157, 255);
+            }
+        }
         else
         {
-            if (id == 2)
-            this.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0, 134, 157, 255);
+            if (!GameNetworkController.instance.gameStarted || GameNetworkController.instance.gameWon)
+            { return; }
+            else
+            {
+                if (id == 2)
+                    this.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0, 134, 157, 255);
+            }
         }
         if (this.transform.position.x - opponent.transform.position.x > 0)
         {
@@ -86,10 +105,13 @@ public class StateController : MonoBehaviour
         //setInput(0, 0, 0);
         setInput(inputOne, inputTwo, inputThree);
         i++;
+
+
         if (i >= 30)
             softClearInputs();
-        currentState.OnStateUpdate();
         OverriddenUpdate();
+        currentState.OnStateUpdate();
+
     }
     /*Allows for children classes to add stuff that is unique to them */
     protected virtual void OverriddenUpdate ()
@@ -105,7 +127,7 @@ public class StateController : MonoBehaviour
      * The second function is an overloaded version, but allows for a value to be passed through.
      * it does the exact same function, but also passes a time value into the onStateEnter function.
      */
-    public void SetState(State state)
+    public virtual void SetState(State state, bool ignore = true)
     {
         if (state == currentState) return;
         else if (currentState != null) currentState.OnStateExit();
@@ -113,7 +135,7 @@ public class StateController : MonoBehaviour
         currentState = state;
         currentState.OnStateEnter(this);
     }
-    public void SetState(State state, float valueToPass)
+    public virtual void SetState(State state, float valueToPass, bool ignore = true)
     {
         if (state == currentState) return;
         else if (currentState != null) currentState.OnStateExit();
@@ -121,7 +143,7 @@ public class StateController : MonoBehaviour
         currentState = state;
         currentState.OnStateEnter(valueToPass, this);
     }
-    public void SetState(State state, float valueToPassOne, float valueToPassTwo)
+    public virtual void SetState(State state, float valueToPassOne, float valueToPassTwo, bool ignore = true)
     {
         if (state == currentState) return;
         else if (currentState != null) currentState.OnStateExit();
@@ -245,7 +267,7 @@ public class StateController : MonoBehaviour
         }
         i = 0;
     }
-    void setInput(int x, int y, int z)
+   protected void setInput(int x, int y, int z)
     {
         inputs[i].One = (InputEnum)x;
         inputs[i].Two = (InputEnum)y;
@@ -281,5 +303,21 @@ public class StateController : MonoBehaviour
     {
         inputThree = z;
     }
-    
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext((int)inputOne);
+            stream.SendNext((int)inputTwo);
+            stream.SendNext((int)inputs[i].Three);
+        }
+        else if (stream.IsReading)
+        {
+            inputOne = (int)stream.ReceiveNext();
+            inputTwo = (int)stream.ReceiveNext();
+            inputThree = (int)stream.ReceiveNext();
+        }
+    }
+
 }

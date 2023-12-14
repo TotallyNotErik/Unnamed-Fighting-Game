@@ -14,8 +14,16 @@ public class Attacking : Grounded
  
     protected override void OnEnter()
     {
-        controller.transform.GetChild(0).GetChild(0).GetComponent<Hitbox>().hitStun = this.hitStun;
-        controller.transform.GetChild(0).GetChild(0).GetComponent<Hitbox>().knockBack = this.knockBack;
+        if (controller.isOnline())
+        {
+            controller.transform.GetChild(0).GetChild(0).GetComponent<OnlineHitBox>().hitStun = this.hitStun;
+            controller.transform.GetChild(0).GetChild(0).GetComponent<OnlineHitBox>().knockBack = this.knockBack;
+        }
+        else
+        {
+            controller.transform.GetChild(0).GetChild(0).GetComponent<Hitbox>().hitStun = this.hitStun;
+            controller.transform.GetChild(0).GetChild(0).GetComponent<Hitbox>().knockBack = this.knockBack;
+        }
         frameCount = 0;
         playAnimation(true);
     }

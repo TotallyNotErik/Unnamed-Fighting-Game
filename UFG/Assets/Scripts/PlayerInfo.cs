@@ -31,6 +31,7 @@ public class PlayerInfo : MonoBehaviour
                 NetworkManager.instance.SetNickName(profile.DisplayName);
                 StartMenu.instance.index = 6;
                 StartMenu.instance.SetScreen(6);
+                DontDestroyOnLoad(gameObject);
             },
             error => Debug.Log(error.ErrorMessage)
         );
